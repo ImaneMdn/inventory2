@@ -1,0 +1,131 @@
+<div class="inventoryman">
+    <img src="assets/image/inventorymanager.png" alt="">
+      
+     </div>
+  <div class="login" >
+    <div class="card">
+         <span class="borderLine"></span>   
+          <!--login function is from login value in input-->
+       <form #signupForm="ngForm" (ngSubmit)="signup(signupForm)">
+        <img src="assets/image/naftallogo.png" alt="naftal logo">
+         
+         <h2>Sign Up</h2>
+          <!--IMPORTANT! TO GET THE NAME AND ID OF THE USER 
+          WE WILL GO TO SPRINGBOOT WE ACCESS JwtRequest file which have the userName and UserPassword-->
+         <div class="inputcard">
+          
+          <input type="text" 
+          ngModel
+          name="chefunitematricule"
+          id="chefunitematricule">
+          <span ><b> Nom</b></span>
+          <i></i>
+        </div>
+        <div class="inputcard">
+          
+            <input type="text" 
+            ngModel
+            name="chefunitematricule"
+            id="chefunitematricule">
+            <span ><b> Matricule</b></span>
+            <i></i>
+          </div>
+          <div class="inputcard">
+       
+            <input type="password" 
+            ngModel
+            name="chefunitemdp"
+            id="chefunitemdp">
+            <span > <b> Mot de passe</b></span>
+            <i></i>
+           </div>
+           <div class="inputcard">
+          
+               <input type="email" 
+               ngModel
+               name="chefunitemdp"
+               id="chefunitemdp">
+               <span > <b> Email</b></span>
+               <i></i>
+              </div>
+
+      <div class="container">
+        <div class="inputcard">
+          <select name="role" id="role" ngModel>
+                   <option value="" disabled selected>choisi un role</option>
+                   <option value="chefunite">chefunite</option>
+                   <option value="chefcentre">chefcentre</option>
+                   <option value="chefequipe">chefequipe</option>
+               </select>
+               <span > <b> Role</b></span>
+          
+               
+   
+        </div>
+    
+        <div class="inputcard">
+              
+                <select name="stricture" id="stricture" [(ngModel)]="selectedStructure" (change)="onSelectStructure($event)">
+               <option value="" disabled selected>choisi une stricture</option>
+               <option value="centre">centre</option>
+               <option value="unite">unité</option>
+               
+               </select> 
+                <span > <b> Stricture</b></span>
+               
+           
+        </div> 
+    <div class="inputcard" id="centre" >
+          
+          <select name="centre" id="centre" [ngClass]="{'show': selectedStructure === 'centre'}">
+          <option value="" disabled selected>choisi une stricture</option>
+          <option value="centre1">centre 1</option>
+          <option value="centre2">centre 2</option>
+          <option value="centre3">center 3</option>
+          </select> 
+           <span > <b> Centre</b></span>
+          
+         
+      
+   </div> 
+   <div class="inputcard"  id="unite">
+   
+    <select name="unite" id="unite" [class.show]="selectedStructure === 'unite'">
+    <option value="" disabled selected>choisi une stricture</option>
+    <option value="unite1">unite 1</option>
+    <option value="unite2">unite 2</option>
+    <option value="unite3">unite 3</option>
+    </select> 
+     <span > <b> Unite</b></span>
+    
+
+    
+   
+
+</div> 
+
+        
+      </div>
+    
+        
+      <div class="together"> 
+        <span> <a routerLink="/login" style=" color: black; margin-bottom: 4px; "><b>Go back to login</b></a> </span>
+        
+
+      </div>
+      <div class="inputcard" style="margin: auto;"> 
+        <input type="submit"  value="Sign Up">
+      </div>
+        
+        
+         
+       
+        
+       
+      </form>
+      
+     
+    </div>
+  </div>
+  
+  
