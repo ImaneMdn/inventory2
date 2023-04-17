@@ -11,6 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { CentreComponent } from './centre/centre.component';
 import { UniteComponent } from './unite/unite.component';
 import { LocaliteComponent } from './localite/localite.component';
+import { SettingComponent } from './setting/setting.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'chefcentre', component: ChefcentreComponent},
       { path: 'centre', component: CentreComponent},
       { path: 'unite', component: UniteComponent},
-      { path: 'localite', component: LocaliteComponent}
+      { path: 'localite', component: LocaliteComponent},
+      { path: 'settings', component: SettingComponent},
     ]
   },
   

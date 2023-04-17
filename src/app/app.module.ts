@@ -34,6 +34,7 @@ import { SignupComponent } from './signup/signup.component';
 import { UniteComponent } from './unite/unite.component';
 import { CentreComponent } from './centre/centre.component';
 import { LocaliteComponent } from './localite/localite.component';
+import { SettingComponent } from './setting/setting.component';
 
 
 
@@ -55,7 +56,8 @@ import { LocaliteComponent } from './localite/localite.component';
     SignupComponent,
     UniteComponent,
     CentreComponent,
-    LocaliteComponent
+    LocaliteComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import { AuthenticationService } from '../services/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +15,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginComponent  implements OnInit {
   //here we will inject the service chef unite chef equipe chef equipe
-  constructor(private router: Router,
+  constructor(private router: Router, private auth:AuthenticationService
              /*private chefunite: ChefuniteService, 
               private userAuthService:UniteAuthService,*/
               
@@ -22,10 +24,42 @@ export class LoginComponent  implements OnInit {
       
   }
   
-
   
+  onSubmit(form:NgForm){
+  
+    // TODO: Send login request to server and check for success
+    const matricule = form.value.matricule;
+    const password = form.value.password;
+    this.auth.login(matricule, password).subscribe((res:any)=>{
+      localStorage.setItem('user', JSON.stringify(res))
+      //redirect to dashboard
 
-  login(loginForm:NgForm){
+      this.router.navigate(['home'])
+    },
+    err=>{
+      console.log(err);
+    })
+    
+    
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*the first one 
+  
+  login(form:NgForm){
   
     // TODO: Send login request to server and check for success
     const loginSuccess = true;
@@ -35,6 +69,10 @@ export class LoginComponent  implements OnInit {
       this.router.navigate(['home']);
     }
     
+  
+  */ 
+
+  
   
     
     //we pass in the login data which is in the loginform
@@ -70,4 +108,4 @@ export class LoginComponent  implements OnInit {
     
   }
 
-}
+
