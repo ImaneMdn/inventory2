@@ -28,6 +28,19 @@ export class AuthenticationService {
     return this.http.get('http://localhost:8000/api/user',{headers:headers});
   }
 
+
+admin() {
+    const admin:any = localStorage.getItem('admin');
+    const userObj = JSON.parse(admin);
+
+    const token = userObj.token;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer $(token)`,
+    });
+    return this.http.get('http://localhost:8000/api/admin',{headers:headers});
+  }
+
+  
   logout(){
     const user:any = localStorage.getItem('user');
     const userObj = JSON.parse(user);
@@ -55,6 +68,6 @@ export class AuthenticationService {
         structure_id:structure_id,
 
       }
-      return this.http.post('http://localhost:8000/api/register', data);
+      return this.http.post('http://192.168.43.251:8000/api/register', data);
   }
 }

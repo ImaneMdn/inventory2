@@ -14,16 +14,44 @@
                   <h5> Matricule : {{user.matricule}}</h5>
                 <br>
                 <p>Nom : {{user.nom}}</p>-->
+                
                 <div style="display: flex; justify-content: flex-start;">
-                    <h5> Matricule: 1234 </h5>
                     
-                    <p>Nom : imane </p>
-                    <br>
-                    <p>Prénom : imane</p>
+                    <div class="card-body">
+                        <p class="card-text"><i>Nom:</i> imane Midoune</p><!-- {{user.name}}-->
+                        
+                        <p class="card-text"> <i>Email:</i> md@gmail.com</p>
+                        <p class="card-text"> <i>Matricule:</i> 1234 </p>
+                        <p class="card-text"> <i>Role:</i> chef de centre</p>
+                        <br>
+                        <button class="btn btn-primary" (click)="showPasswordForm()">Changer le mot de passe</button>
+                    </div>
+                    
                 </div>
                
                 
-
+                <div *ngIf="showPasswordFormPopup">
+                
+                    <div class="popup-container">
+                      <h2>Changer le mot de passe  </h2>
+                      <form (submit)="submitPasswordForm()">
+                        <label for="old-password">Ancienne mot de passe<i style="color: red;">*</i></label>
+                        <input type="password" id="old-password" name="old-password" required>
+                  
+                        <label for="new-password">Nouvelle mot de passe<i style="color: red;">*</i></label>
+                           <input type="password" id="new-password" name="new-password" required>
+                  
+                        <label for="confirm-password">Confirmer le mot de passe<i style="color: red;">*</i></label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <div class="button-container">
+                            <button type="submit">Confirmer</button>
+                            <button (click)="hidePasswordForm()">Annuler</button>
+                        </div>
+                        
+                      </form>
+                     
+                    </div>
+                </div>
 
 
             </div>

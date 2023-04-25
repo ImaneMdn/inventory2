@@ -1,0 +1,172 @@
+<div class="container-fluid page">
+    <div class="page__box p-3 mt-2">
+        <div class="page__box p-3 mt-2" style="display: flex; align-items: center;">Admin
+            <div style="display: flex; justify-content: flex-end; flex: 1; ">
+                <ul>
+                  <li>
+                     <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
+                      <img src="assets/image/userlogo.png" alt="" class="user-image mr-1 p-2" /><b style="color: azure;"> User Name</b>
+                      <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+                     </button>
+                     <mat-menu #menu="matMenu">
+                      <button mat-menu-item onclick="logout()">
+                        <mat-icon>exit_to_app</mat-icon>
+                      logout
+                      </button>
+                     </mat-menu>
+                </li>
+              </ul>
+              </div>
+             <!-- <div style="display: flex; justify-content: flex-end; flex: 1; "><mat-form-field>
+             <mat-label>Rechercher</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" #input >
+                 </mat-form-field>
+            </div> -->
+    </div>
+    <div class="page__content shadow p-3 position-relative">
+        
+        <div class="page__content-data position-absolute">
+            
+            <div class=" example-container mat-elevation-z8">
+                
+                <table mat-table [dataSource]="dataSource" matSort >
+    
+                    <!--id column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+                        
+                    </ng-container>
+    
+                     <!--firstname column -->
+                     <ng-container matColumnDef="firstname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</th>
+                        <td mat-cell *matCellDef="let row">{{row.firstname}}</td>
+    
+                    </ng-container>
+    
+                    <ng-container matColumnDef="lastname">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                        <td mat-cell *matCellDef="let row">{{row.lastname}}</td>
+    
+                    </ng-container>
+                    <ng-container matColumnDef="role">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                        <td mat-cell *matCellDef="let row">{{row.role}}</td>
+    
+                    </ng-container>
+                    <ng-container matColumnDef="structure">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Structure</th>
+                        <td mat-cell *matCellDef="let row">{{row.structure}}</td>
+    
+                    </ng-container>
+
+                    <!--
+                        <ng-container matColumnDef="here">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                        <td mat-cell *matCellDef="let row" colspan="2"> 
+                            <mat-icon
+                                 class="accepted" 
+                                 [ngClass]="{ 'selected-icon': row.accepted, 'not-selected-icon': !row.accepted, 'pointer-cursor': !row.accepted || row.refused, 'default-cursor': row.accepted && !row.refused}"
+                                 (click)="handleAccepted(row)" > query_builder
+                            </mat-icon>
+                            <mat-icon
+                                 class="accepted" 
+                                 [ngClass]="{ 'selected-icon': row.accepted, 'not-selected-icon': !row.accepted, 'pointer-cursor': !row.accepted || row.refused, 'default-cursor': row.accepted && !row.refused}"
+                                 (click)="handleAccepted(row)" > check_circle
+                            </mat-icon>
+                            <mat-icon 
+                                 class="refused" 
+                                 [ngClass]="{ 'selected-icon': row.refused, 'not-selected-icon': !row.refused , 'pointer-cursor': !row.refused || row.accepted, 'default-cursor': row.refused && !row.accepted}"
+                                 (click)="handleRefused(row)"  > delete_forever
+                            </mat-icon>
+                        </td>
+                        
+    
+                    </ng-container>
+                        
+                    -->
+    
+                    <ng-container matColumnDef="here"><!--here is gonna be pending-->
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                        <td mat-cell *matCellDef="let row" colspan="2"> 
+                            <mat-icon
+                                 class="pending" 
+                                 [ngClass]="{'pointer-cursor':row.here}"
+                                 *ngIf="!clicked" (click)="showIconsFor(row);showIcons = !showIcons;"> query_builder
+                            </mat-icon>
+                            <div *ngIf="showIcons && selectedRow == row">
+                                <mat-icon class="accepted" [ngClass]="{ 'selected-icon': row.accepted, 'not-selected-icon': !row.accepted, 'pointer-cursor': !row.accepted || row.refused, 'default-cursor': row.accepted && !row.refused}" (click)="showacceptedForm(row)">check_circle</mat-icon>
+                                
+                                <mat-icon class="refused" [ngClass]="{ 'selected-icon': row.refused, 'not-selected-icon': !row.refused , 'pointer-cursor': !row.refused || row.accepted, 'default-cursor': row.refused && !row.accepted}" (click)="showrefusedForm(row)">delete_forever</mat-icon>
+                                
+                            </div>
+                            <div *ngIf="showacceptedFormPopup && selectedRow == row">
+                
+                                <div class="popup-container">
+                                  <h2>Voulez vous accepter la demande?</h2>
+                                  <form (submit)="handleAccepted(row)">
+                                    
+                                    <div class="button-container">
+                                        <button type="submit">Confirmer</button>
+                                        <button (click)="hideacceptedForm()">Annuler</button>
+                                    </div>
+                                    
+                                  </form>
+                                 
+                                </div>
+                            </div>
+
+                            <div *ngIf="showrefusedFormPopup && selectedRow == row">
+                
+                                <div class="popup-container">
+                                  <h2>Voulez vous réfuser la demande?</h2>
+                                  <form (submit)="handleRefused(row)">
+                                    
+                                    <div class="button-container">
+                                        <button type="submit">Confirmer</button>
+                                        <button (click)="hiderefusedForm()">Annuler</button>
+                                    </div>
+                                    
+                                  </form>
+                                 
+                                </div>
+                            </div>
+
+                        </td>
+                        
+    
+                    </ng-container>
+                    
+                    <!--
+
+                        <div *ngIf="showPasswordFormPopup">
+                
+                        <div class="popup-container">
+                          <h2>Voulez Vous accepter la demande?</h2>
+                          <form (submit)="submitPasswordForm()">
+                            
+                            <div class="button-container">
+                                <button type="submit">Confirmer</button>
+                                <button (click)="hidePasswordForm()">Annuler</button>
+                            </div>
+                            
+                          </form>
+                         
+                        </div>
+                    </div>
+                    -->
+                    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                </table>
+          
+                <mat-paginator class="custom-paginator" [pageSizeOptions]="[7, 8]"  showFirstLastButtons  aria-label="select a page"></mat-paginator>
+
+                
+            </div>
+    </div>
+</div>
+
+

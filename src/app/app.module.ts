@@ -35,6 +35,7 @@ import { UniteComponent } from './unite/unite.component';
 import { CentreComponent } from './centre/centre.component';
 import { LocaliteComponent } from './localite/localite.component';
 import { SettingComponent } from './setting/setting.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -57,7 +58,8 @@ import { SettingComponent } from './setting/setting.component';
     UniteComponent,
     CentreComponent,
     LocaliteComponent,
-    SettingComponent
+    SettingComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

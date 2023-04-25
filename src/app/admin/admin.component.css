@@ -7,7 +7,7 @@
 }
 .example-container {
   height: 500px;
-  width: 920px;
+  width: 990px;
   max-width: 100%;
   overflow-x: auto;
 }
@@ -39,7 +39,10 @@
     font-size: 12px;
   }
   
- 
+  table {
+    width: 100%;
+    
+  }
   .mat-mdc-form-field {
 
     font-size: 14px;
@@ -47,52 +50,108 @@
     
   }
   
-  .card-text {
-    font-size: 24px; 
-    margin-bottom: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: 40px;
-    margin-left: 15px;
+  
+  td, th {
+    width: 25%;
+    font-size: 23px;
+    font-family: arial,sans-serif;
   }
-  .card-text i {
-    font-weight: bold;
-    color: #213164;
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  .custom-paginator {
+    font-size: 20px; /* change the font size */
+    height: 40px; /* change the height */
+    font-family: arial,sans-serif;
+  }
+  .mat-icon.not-selected-icon {
+    display: none;
+  }
+.mat-icon.pending {
+  color: orange;
+}
+
+.mat-icon.accepted {
+  color: green;
+}
+.mat-icon.refused{
+  color: red;
+}
+.mat-icon.accepted ,
+.mat-icon.refused {
+  
+  margin-right: 60px; /* Adjust the margin as needed */
+
+}
+.mat-icon {
+  display: inline;
+}
+
+
+.pointer-cursor {
+    cursor: pointer;
+  }
+  
+  .default-cursor {
+    cursor: default;
   }
 
-  .popup-container {
+
+  ul li {
+    list-style: none;
+
+    
+}
+
+button {
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+.user {
+    font-size:14px;
+}
+
+.user-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.user-image-icon {
+    height: 18px;
+    font-size: 16px;
+    color: azure;
+}
+
+::ng-deep .mat-menu-content {
+    width: 160px;
+}
+
+
+.popup-container {
   background-color: white;
-  width: 450px; /* adjust the width as per your requirement */
+  width: 500px; /* adjust the width as per your requirement */
   padding: 15px;
   position: fixed;
-  top: 55%;
-  left: 67%;
+  top: 49%;
+  left: 52%;
   font-family: Arial, Helvetica, sans-serif;
-  
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .popup-container h2 {
+  font-size: 25px;
   margin-top: 0;
   text-align: center;
  
 }
 
-.popup-container label {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
 
-.popup-container input {
-  display: block;
-  width: 95%;
-  padding: 5px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  height: 10%;
-}
+
 
 .popup-container button {
   padding: 10px 20px;
@@ -135,4 +194,3 @@
   margin-left: 30px;
   margin-right: 50px;
 }
-

@@ -12,6 +12,7 @@ import { CentreComponent } from './centre/centre.component';
 import { UniteComponent } from './unite/unite.component';
 import { LocaliteComponent } from './localite/localite.component';
 import { SettingComponent } from './setting/setting.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'forbidden', component:ForbiddenComponent},
   {path: 'sidenavv' , component:SidenavvComponent},
   {path:'signup', component:SignupComponent},
+  {path:'admin', component:AdminComponent},
   {
     path: 'home', component: HomeComponent,
     children: [

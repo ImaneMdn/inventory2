@@ -8,6 +8,9 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./setting.component.css']
 })
 export class SettingComponent implements OnInit{
+  
+  showPasswordFormPopup = false;
+
   constructor(private auth:AuthenticationService){
     
   }
@@ -19,6 +22,19 @@ export class SettingComponent implements OnInit{
       }, (err) =>{
         console.log(err);
       })
+  }
+
+
+  showPasswordForm() {
+    this.showPasswordFormPopup = true;
+  }
+
+  hidePasswordForm() {
+    this.showPasswordFormPopup = false;
+  }
+
+  submitPasswordForm() {
+    // Implement password form submission logic here
   }
 
 }
