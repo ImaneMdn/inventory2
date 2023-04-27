@@ -22,25 +22,25 @@ export class AdminComponent implements OnInit {
   selectedRow: any;
   filterOn: boolean = false;
   userlist:any;
-  dataSource:any;
+  
   displayedColumns: string[] = ['id', 'name', 'matricule','email','role', 'structure_id', 'status', 'Compte_isActivated', 'edited_by', 'icon'];
   
-  /*
+  
   dataSource = new MatTableDataSource([
-    { id: 1, firstname: 'John', lastname: 'Doe',role: 'chef centre',structure: '1234', here: true, accepted: true, refused: true },
-    { id: 2, firstname: 'Jane', lastname: 'Doe',role: 'chefunite' ,structure: '5687', here: true , accepted: true, refused: true },
-    { id: 3, firstname: 'Bob', lastname: 'Smith',role: 'chefcentre' ,structure: '5687', here: true , accepted: true, refused: true },
-    { id: 4, firstname: 'John', lastname: 'Doe',role: 'cheflocalite' ,structure: '5687', here: true , accepted: true, refused: true },
-    { id: 5, firstname: 'Jane', lastname: 'Doe',role: 'chefcentre' ,structure: '5687', here: true , accepted: true, refused: true },
-    { id: 6, firstname: 'Bob', lastname: 'Smith',role: 'chefcentre' ,structure: '5687', here: true , accepted: true, refused: true },
-    { id: 7, firstname: 'John', lastname: 'Doe',role: 'cheflocalite' ,structure: '5687', here: true , accepted: true, refused: true},
-    { id: 8, firstname: 'Jane', lastname: 'Doe',role: 'chefcentre' ,structure: '5687', here: true , accepted: true, refused: true},
-    { id: 9, firstname: 'Bob', lastname: 'Smith',role: 'chefcentre' ,structure: '5687', here: true , accepted: true, refused: true},
+    { id: 1, firstname: 'John', matricule: '1234',email: 'djd@gmail.com',role: 'chef centre',structure_id: '1234', status: "pending",Compte_isActivated: 0, edited_by: "imane" },
+    { id: 2, firstname: 'Jane', matricule: '1234',email: 'chefunite' ,role: 'chef equipe',structure_id: '5687', status: "pending" ,Compte_isActivated: 1, edited_by: "amina" },
+    { id: 3, firstname: 'Bob', matricule: '5687',email: 'ddd@gmail.com' ,role: 'chef equipe',structure_id: '5687', status: "pending" ,Compte_isActivated: "0", edited_by: "amina" },
+    { id: 4, firstname: 'John', matricule: '1234',email: 'ds@gmail.com' ,role: 'chef equipe',structure_id: '5687', status:"pending" ,Compte_isActivated: "1", edited_by: "amina" },
+    { id: 5, firstname: 'Jane', matricule: '1234',email: 'ddd@gmail.com',role: 'chef equipe' ,structure_id: '5687', status: "refused" ,Compte_isActivated: "1", edited_by: "amina" },
+    { id: 6, firstname: 'Bob', matricule: '5687',email: 'ddd@gmail.com' ,role: 'chef unité',structure_id: '5687', status: "accepted" ,Compte_isActivated: "0", edited_by: "amina" },
+    { id: 7, firstname: 'John', matricule: '1234',email: 'ds@gmail.com' ,role: 'chef unité',structure_id: '5687', status: "accepted" ,Compte_isActivated: "0", edited_by: "amina"},
+    { id: 8, firstname: 'Jane', matricule: '1234',email: 'ddd@gmail.com' ,role: 'chef unité',structure_id: '5687', status: "accepted" ,Compte_isActivated: "1", edited_by: "amina"},
+    { id: 9, firstname: 'Bob', matricule: '5687',email: 'ddd@gmail.com' ,role: 'chef unité',structure_id: '5687', status: "accepted" ,Compte_isActivated: "1", edited_by: "amina"},
     
    
   ]);
   
-  */
+  
 
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -52,49 +52,20 @@ export class AdminComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    /*
+    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    */
+    
     
  }
 
  ngOnInit(): void {
-  this.auth.admin().subscribe(res => {
-    this.userlist = res;
-    this.dataSource=new MatTableDataSource(this.userlist);
-    this.dataSource.paginator=this.paginator;
-    this.dataSource.sort=this.sort;
- })
-
+ 
  this.paginatorIntl.itemsPerPageLabel = 'Le nombre de page:';
   
- /*
-  this.dataSource.data.forEach(row => {
-    const status = localStorage.getItem(`row_${row.id}_status`);
-    if (status === 'accepted') {
-      row.accepted = true;
-      row.refused = false;
-      
-    } else if (status === 'refused') {
-      row.accepted = false;
-      row.refused = true;
-    }
-  });
- */
  
-  
-  
  }
 
- applyFilter(event: Event) {
-   const filterValue = (event.target as HTMLInputElement).value;
-   this.dataSource.filter = filterValue.trim().toLowerCase();
-
-   if (this.dataSource.paginator) {
-     this.dataSource.paginator.firstPage();
-   }
- }
 
  
 showIconsFor(row: any) {
@@ -107,41 +78,14 @@ showIconsFor(row: any) {
 
 handleAccepted(user: any) {
   const id = user.id;
-  this.auth.modifyStatus(id).subscribe((res) => {
-    // Handle success here
-    console.log('Status modified successfully');
-    this.showacceptedFormPopup = false;
-  }, (err) => {
-    console.error(err);
-  });
+  this.showacceptedFormPopup = false;
+   
 }
 
 
-// handleAccepted(row:any) {
-//   this.selectedRow = row;
-//   if (row.accepted && row.refused) {
-//     row.accepted = true;
-//     row.refused = false;
-//     this.showacceptedFormPopup = false;
-//     //this.sendStatus(row, 'accepted');
-//     localStorage.setItem(`row_${row.id}_status`, 'accepted');
-//   }else if (row.accepted && !row.refused) {
-//           //do nothing
-//   }
-  
-// }
-
-handleRefused(row: any) {
-  this.selectedRow = row;
-  if (row.accepted && row.refused) {
-    row.accepted = false;
-    row.refused = true;
-    this.showrefusedFormPopup = false;
-    //this.sendStatus(row, 'accepted');
-    localStorage.setItem(`row_${row.id}_status`, 'refused');
-  }else if (row.refused && !row.accepted) {
-          //do nothing
-  }
+handleRefused(user: any) {
+  const id = user.id;
+  this.showacceptedFormPopup = false;
 }
 
 showacceptedForm(row: any) {
@@ -163,28 +107,7 @@ hiderefusedForm() {
 }
 
 
-//to get the data from admin 
 
-/*
-user:any;
-  ngOnInit(): void {
-     
-      this.auth.admin().subscribe((res)=>{
-        this.user = res;
-      }, (err) =>{
-        console.log(err);
-      })
-  }
-*/
-
-
-
-// sendStatus(row: any, status: string) {
-//   // Make an HTTP call to send the status to the backend
-//   // this.http.post('url', {id: row.id, status}).subscribe(() => {});
-// }
-
-  
  
 }
   

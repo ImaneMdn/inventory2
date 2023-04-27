@@ -9,7 +9,7 @@
        <span class="borderLine"></span>   
         <!--login function is from login value in input-->
      <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-      <img src="assets/image/naftallogo.png" alt="naftal logo">
+      <img src="assets/image/inventorylogo.png" alt="yel inventory logo">
        
        <h2>Log In</h2>
         
@@ -22,7 +22,7 @@
         <span ><b> Matricule</b></span>
         <i></i>
        </div>
-       <div class="error-message" *ngIf="loginErrormat"> <b style="color: red;">Matricule incorrect!</b></div>
+       <div class="error-message" *ngIf="loginError"> <b style="color: red;">Matricule incorrect!</b></div>
        
        
 

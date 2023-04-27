@@ -7,7 +7,7 @@
          <span class="borderLine"></span>   
           <!--login function is from login value in input-->
        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
-        <img src="assets/image/naftallogo.png" alt="naftal logo">
+        <img src="assets/image/inventorylogo.png" alt="yel inventory logo">
          
          <h2>Sign Up</h2>
          
@@ -18,6 +18,7 @@
           name="name">
           <span ><b> Nom</b></span>
           <i></i>
+          <div class="error-message" *ngIf="signuperror"> <b style="color: red;">Le nom est vide!</b></div>
         </div>
         <div class="inputcard">
           
@@ -26,6 +27,7 @@
             name="matricule">
             <span ><b> Matricule</b></span>
             <i></i>
+            <div class="error-message" *ngIf="signuperror"> <b style="color: red;">Le matricule est vide!</b></div>
           </div>
           <div class="inputcard">
        
@@ -34,6 +36,7 @@
             name="password">
             <span > <b> Mot de passe</b></span>
             <i></i>
+            <div class="error-message" *ngIf="signuperror"> <b style="color: red;"> le mot de passe email est vide!</b></div>
            </div>
            <div class="inputcard">
           
@@ -42,6 +45,7 @@
                name="email">
                <span > <b> Email</b></span>
                <i></i>
+               <div class="error-message" *ngIf="signuperror"> <b style="color: red;">email est vide!</b></div>
            </div>
               
 
@@ -80,38 +84,7 @@
           <i></i>
       </div>
 
-        <!--this is for when the user clicks on one of 
-        the structure it shows him center selector or unite selector -->
-
-        <!--
-
-<div class="inputcard" id="centre" >
-          
-          <select name="centre" id="centre" [ngClass]="{'show': selectedStructure === 'centre'}">
-          <option value="" disabled selected>choisi une stricture</option>
-          <option value="centre1">centre 1</option>
-          <option value="centre2">centre 2</option>
-          <option value="centre3">center 3</option>
-          </select> 
-           <span > <b> Centre</b></span>
-          
-         
       
-    </div> 
-    <div class="inputcard"  id="unite">
-   
-     <select name="unite" id="unite" [class.show]="selectedStructure === 'unite'">
-      <option value="" disabled selected>choisi une stricture</option>
-      <option value="unite1">unite 1</option>
-      <option value="unite2">unite 2</option>
-      <option value="unite3">unite 3</option>
-     </select> 
-     <span > <b> Unite</b></span>
-    
-    </div> 
-
-        -->
-    
         
   </div>
     

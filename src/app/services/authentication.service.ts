@@ -10,7 +10,7 @@ export class AuthenticationService {
   constructor(private http:HttpClient) { }
 
   login(matricule:string, password:string) {
-   return this.http.post('http://localhost:8000/api/login', {
+   return this.http.post('', {
       matricule:matricule,
       password:password
     });
@@ -26,7 +26,7 @@ export class AuthenticationService {
     const headers = new HttpHeaders({
       Authorization: `Bearer $(token)`,
     });
-    return this.http.get('http://localhost:8000/api/user',{headers:headers});
+    return this.http.get('',{headers:headers});
   }
 
 
@@ -39,7 +39,7 @@ admin() {
     // const headers = new HttpHeaders({
     //   Authorization: `Bearer $(token)`,
     // });,{headers:headers}
-    return this.http.get('http://localhost:8000/api/getDemandes');
+    return this.http.get('');
   }
 
   
@@ -52,7 +52,7 @@ admin() {
       Authorization: `Bearer $(token)`,
     });
 
-     return this.http.post('http://localhost:8000/api/logout', {headers:headers})
+     return this.http.post('', {headers:headers})
 
   }
 
@@ -70,14 +70,14 @@ admin() {
         structure_id:structure_id,
 
       }
-      return this.http.post('http://localhost:8000/api/register', data);
+      return this.http.post('', data);
   }
 
 
   //accepter refuser la demande de compte:
 
   modifyStatus(id: number) {
-    return this.http.put(`http://localhost:8000/api/acceptDemandeCompte/${id}`, {} );
+    return this.http.put(`${id}`, {} );
   }
 
   centre() {
@@ -85,11 +85,7 @@ admin() {
     const centredata:any = localStorage.getItem('centredata');
     const userObj = JSON.parse(centredata);
 
-    // const token = userObj.token;
-    // const headers = new HttpHeaders({
-    //   Authorization: `Bearer $(token)`,
-    // });,{headers:headers}
-    return this.http.get('http://localhost:8000/api/getCentersInventoryCountts');
+    return this.http.get('');
   }
   
 }
