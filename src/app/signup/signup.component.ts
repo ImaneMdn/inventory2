@@ -60,7 +60,7 @@ onSubmit(form:NgForm){
     this.router.navigate(['login'])
   },
   (err)=>{
-    this.errors =err.error.errors
+    this.errors =err.error.errors;
     
   }
   )

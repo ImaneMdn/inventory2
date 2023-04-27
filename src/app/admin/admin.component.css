@@ -1,4 +1,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+
 .page {
     color: white;
     padding: 0 1rem;
@@ -7,7 +11,7 @@
 }
 .example-container {
   height: 500px;
-  width: 990px;
+  width: 1200px;
   max-width: 100%;
   overflow-x: auto;
 }
@@ -193,4 +197,12 @@ button {
   margin: 0 auto;
   margin-left: 30px;
   margin-right: 50px;
+}
+
+.example-button-row {
+ justify-content: space-between;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
 }

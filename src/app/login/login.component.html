@@ -12,8 +12,7 @@
       <img src="assets/image/naftallogo.png" alt="naftal logo">
        
        <h2>Log In</h2>
-        <!--IMPORTANT! TO GET THE NAME AND ID OF THE USER 
-        WE WILL GO TO SPRINGBOOT WE ACCESS JwtRequest file which have the userName and UserPassword-->
+        
        <div class="inputcard">
         
         <input type="text" 
@@ -22,7 +21,9 @@
         required>
         <span ><b> Matricule</b></span>
         <i></i>
-      </div>
+       </div>
+       <div class="error-message" *ngIf="loginErrormat"> <b style="color: red;">Matricule incorrect!</b></div>
+       
        
 
       <div class="inputcard">
@@ -33,7 +34,9 @@
        required>
        <span > <b> Mot de passe</b></span>
        <i></i>
+       
        </div>
+       <div class="error-message" *ngIf="loginError"> <b style="color: red;">Mot de passe incorrect!</b></div>
        <div class="together"> <div class="links">
        <input type="checkbox" id="check" >
         <label for="check" style="margin-left: 5px;" ><b> Remember me</b></label>

@@ -36,6 +36,7 @@ import { CentreComponent } from './centre/centre.component';
 import { LocaliteComponent } from './localite/localite.component';
 import { SettingComponent } from './setting/setting.component';
 import { AdminComponent } from './admin/admin.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -83,7 +84,8 @@ import { AdminComponent } from './admin/admin.component';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
    
   
 

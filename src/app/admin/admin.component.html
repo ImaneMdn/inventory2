@@ -33,33 +33,89 @@
     
                     <!--id column -->
                     <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
-                        <td mat-cell *matCellDef="let row">{{row.id}}</td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+                        <td mat-cell *matCellDef="let user">{{user.id}}</td>
                         
                     </ng-container>
     
                      <!--firstname column -->
-                     <ng-container matColumnDef="firstname">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</th>
-                        <td mat-cell *matCellDef="let row">{{row.firstname}}</td>
+                     <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom et prénom</th>
+                        <td mat-cell *matCellDef="let user">{{user.name}}</td>
     
                     </ng-container>
     
-                    <ng-container matColumnDef="lastname">
+                    <ng-container matColumnDef="matricule">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Matricule</th>
+                        <td mat-cell *matCellDef="let user">{{user.matricule}}</td>
+    
+                    </ng-container>
+                    <ng-container matColumnDef="email">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-                        <td mat-cell *matCellDef="let row">{{row.lastname}}</td>
+                        <td mat-cell *matCellDef="let user">{{user.email}}</td>
     
                     </ng-container>
                     <ng-container matColumnDef="role">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
-                        <td mat-cell *matCellDef="let row">{{row.role}}</td>
+                        <td mat-cell *matCellDef="let user">{{user.role}}</td>
     
                     </ng-container>
-                    <ng-container matColumnDef="structure">
+                    <ng-container matColumnDef="structure_id">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Structure</th>
-                        <td mat-cell *matCellDef="let row">{{row.structure}}</td>
+                        <td mat-cell *matCellDef="let user">{{user.structure_id}}</td>
     
                     </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                        <td mat-cell *matCellDef="let user">{{user.status}} 
+                            <mat-icon class="pending" *ngIf="user.status === 'pending'">query_builder</mat-icon>
+                            <mat-icon class="accepted" *ngIf="user.status === 'accepted'">check_circle</mat-icon>
+                            <mat-icon class="refused" *ngIf="user.status === 'refused'">delete_forever</mat-icon>
+                        </td>
+    
+                    </ng-container>
+                    <ng-container matColumnDef="Compte_isActivated">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>compte activé</th>
+                        <td mat-cell *matCellDef="let user">{{user.Compte_isActivated}}</td>
+    
+                    </ng-container>
+                    <ng-container matColumnDef="edited_by">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>éditer par:</th>
+                        <td mat-cell *matCellDef="let user">{{user.edited_by}}</td>
+    
+                    </ng-container>
+
+                    <ng-container matColumnDef="icon">
+                        <th mat-header-cell *matHeaderCellDef>Icon</th>
+                        <td mat-cell *matCellDef="let user">
+                            <div class="example-button-row">
+                            <button mat-raised-button color="primary" (click)="showacceptedForm(user)">Modifier</button>
+                            <button mat-raised-button color="warn" (click)="showrefusedForm(user)">Supprimer</button>
+                        
+                        </div>
+                        <div *ngIf="showacceptedFormPopup && selectedRow == user">
+                
+                            <div class="popup-container">
+                              <h2>Voulez vous accepter ou réfuser la demande?</h2>
+                              
+                                
+                                <div class="button-container">
+                                    <button (click)="handleAccepted(user)" >accepter</button>
+                                    <button (click)="handleRefused(user)">réfuser</button>
+                                    <button (click)="hideacceptedForm()">Annuler</button>
+                                </div>
+                                
+                             
+                             
+                            </div>
+                        </div>
+
+                            
+                        </td>
+                    </ng-container>
+                    
+
+
 
                     <!--
                         <ng-container matColumnDef="here">
@@ -86,12 +142,15 @@
                     </ng-container>
                         
                     -->
-    
-                    <ng-container matColumnDef="here"><!--here is gonna be pending-->
+                    
+
+                    <!--this is the most important 
+
+                      <ng-container matColumnDef="here">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                         <td mat-cell *matCellDef="let row" colspan="2"> 
                             <mat-icon
-                                 class="pending" 
+                                 class="refused" 
                                  [ngClass]="{'pointer-cursor':row.here}"
                                  *ngIf="!clicked" (click)="showIconsFor(row);showIcons = !showIcons;"> query_builder
                             </mat-icon>
@@ -136,11 +195,10 @@
                         </td>
                         
     
-                    </ng-container>
+                    </ng-container> -->
                     
-                    <!--
-
-                        <div *ngIf="showPasswordFormPopup">
+                    
+                    <!-- <div *ngIf="showPasswordFormPopup">
                 
                         <div class="popup-container">
                           <h2>Voulez Vous accepter la demande?</h2>
@@ -158,7 +216,7 @@
                     -->
                     
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
                     
                 </table>
           

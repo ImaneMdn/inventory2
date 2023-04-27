@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +31,15 @@ export class AuthenticationService {
 
 
 admin() {
-    const admin:any = localStorage.getItem('admin');
-    const userObj = JSON.parse(admin);
+ 
+    const userlist:any = localStorage.getItem('userlist');
+    const userObj = JSON.parse(userlist);
 
-    const token = userObj.token;
-    const headers = new HttpHeaders({
-      Authorization: `Bearer $(token)`,
-    });
-    return this.http.get('http://localhost:8000/api/admin',{headers:headers});
+    // const token = userObj.token;
+    // const headers = new HttpHeaders({
+    //   Authorization: `Bearer $(token)`,
+    // });,{headers:headers}
+    return this.http.get('http://localhost:8000/api/getDemandes');
   }
 
   
@@ -56,7 +58,7 @@ admin() {
 
 
   //register 
-  register(name:string, email:string, matricule:number, password:string, role:string,structure_type:string, structure_id:number) {
+  register(name:string, email:string, matricule:number, password:string, role:string,structure_type:string, structure_id:string) {
       
       const data={
         name:name,
@@ -68,6 +70,26 @@ admin() {
         structure_id:structure_id,
 
       }
-      return this.http.post('http://192.168.43.251:8000/api/register', data);
+      return this.http.post('http://localhost:8000/api/register', data);
   }
+
+
+  //accepter refuser la demande de compte:
+
+  modifyStatus(id: number) {
+    return this.http.put(`http://localhost:8000/api/acceptDemandeCompte/${id}`, {} );
+  }
+
+  centre() {
+ 
+    const centredata:any = localStorage.getItem('centredata');
+    const userObj = JSON.parse(centredata);
+
+    // const token = userObj.token;
+    // const headers = new HttpHeaders({
+    //   Authorization: `Bearer $(token)`,
+    // });,{headers:headers}
+    return this.http.get('http://localhost:8000/api/getCentersInventoryCountts');
+  }
+  
 }

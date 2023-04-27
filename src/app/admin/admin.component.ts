@@ -20,11 +20,12 @@ export class AdminComponent implements OnInit {
   showacceptedFormPopup = false;
   showrefusedFormPopup = false;
   selectedRow: any;
-  displayedColumns: string[] = ['id', 'firstname', 'lastname','role','structure', 'here' ];
-  //this is for accepted and refused icon.
+  filterOn: boolean = false;
+  userlist:any;
+  dataSource:any;
+  displayedColumns: string[] = ['id', 'name', 'matricule','email','role', 'structure_id', 'status', 'Compte_isActivated', 'edited_by', 'icon'];
   
- 
-
+  /*
   dataSource = new MatTableDataSource([
     { id: 1, firstname: 'John', lastname: 'Doe',role: 'chef centre',structure: '1234', here: true, accepted: true, refused: true },
     { id: 2, firstname: 'Jane', lastname: 'Doe',role: 'chefunite' ,structure: '5687', here: true , accepted: true, refused: true },
@@ -38,12 +39,10 @@ export class AdminComponent implements OnInit {
     
    
   ]);
+  
+  */
 
- 
-
-//this is for filtering scanned and not scanned
-
-  filterOn: boolean = false;
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -51,30 +50,25 @@ export class AdminComponent implements OnInit {
     
   }
 
-   //data is supposed to be like this :
-
-   /*it doesnt work unless i remove the data source that is above */
-   /*
-   userlist:any;
-   dataSource:any;
-   Loaduser() {
-     this.auth.admin().subscribe(res => {
-        this.userlist = res;
-        this.dataSource=new MatTableDataSource(this.userlist);
-        this.dataSource.paginator=this.paginator;
-        this.dataSource.sort=this.sort;
-     })
-   }
-   */
-   
-  
 
   ngAfterViewInit() {
+    /*
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    */
+    
  }
 
  ngOnInit(): void {
+  this.auth.admin().subscribe(res => {
+    this.userlist = res;
+    this.dataSource=new MatTableDataSource(this.userlist);
+    this.dataSource.paginator=this.paginator;
+    this.dataSource.sort=this.sort;
+ })
+
+ this.paginatorIntl.itemsPerPageLabel = 'Le nombre de page:';
+  
  /*
   this.dataSource.data.forEach(row => {
     const status = localStorage.getItem(`row_${row.id}_status`);
@@ -90,7 +84,7 @@ export class AdminComponent implements OnInit {
  */
  
   
-   this.paginatorIntl.itemsPerPageLabel = 'Le nombre de page:';
+  
  }
 
  applyFilter(event: Event) {
@@ -102,19 +96,7 @@ export class AdminComponent implements OnInit {
    }
  }
 
- handleAccepted(row:any) {
-  this.selectedRow = row;
-  if (row.accepted && row.refused) {
-    row.accepted = true;
-    row.refused = false;
-    this.showacceptedFormPopup = false;
-    //this.sendStatus(row, 'accepted');
-    localStorage.setItem(`row_${row.id}_status`, 'accepted');
-  }else if (row.accepted && !row.refused) {
-          //do nothing
-  }
-  
-}
+ 
 showIconsFor(row: any) {
 
   this.selectedRow = row; // Set the selected row
@@ -123,7 +105,31 @@ showIconsFor(row: any) {
   
 }
 
+handleAccepted(user: any) {
+  const id = user.id;
+  this.auth.modifyStatus(id).subscribe((res) => {
+    // Handle success here
+    console.log('Status modified successfully');
+    this.showacceptedFormPopup = false;
+  }, (err) => {
+    console.error(err);
+  });
+}
 
+
+// handleAccepted(row:any) {
+//   this.selectedRow = row;
+//   if (row.accepted && row.refused) {
+//     row.accepted = true;
+//     row.refused = false;
+//     this.showacceptedFormPopup = false;
+//     //this.sendStatus(row, 'accepted');
+//     localStorage.setItem(`row_${row.id}_status`, 'accepted');
+//   }else if (row.accepted && !row.refused) {
+//           //do nothing
+//   }
+  
+// }
 
 handleRefused(row: any) {
   this.selectedRow = row;

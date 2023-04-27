@@ -14,34 +14,37 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent  implements OnInit {
-  //here we will inject the service chef unite chef equipe chef equipe
+  
+  loginError: boolean = false;
+  loginErrormat: boolean = false;
+
   constructor(private router: Router, private auth:AuthenticationService
-             /*private chefunite: ChefuniteService, 
-              private userAuthService:UniteAuthService,*/
-              
+            
               ) {}
   ngOnInit(): void {
       
   }
   
+  /*
   
-  onSubmit(form:NgForm){
   
-    // TODO: Send login request to server and check for success
+  */
+  onSubmit(form: NgForm) {
     const matricule = form.value.matricule;
     const password = form.value.password;
-    this.auth.login(matricule, password).subscribe((res:any)=>{
-      localStorage.setItem('user', JSON.stringify(res))
-      //redirect to dashboard
-
-      this.router.navigate(['home'])
-    },
-    err=>{
+    this.auth.login(matricule, password).subscribe((res: any) => {
+      localStorage.setItem('user', JSON.stringify(res));
+      this.router.navigate(['home']);
+    }, err => {
       console.log(err);
-    })
-    
-    
-    
+      if (err.status === 401) {
+        if (err.error === 'Incorrect Password') {
+          this.loginError = true;
+        } else if (err.error === 'Incorrect Matricule') {
+          this.loginErrormat = true;
+        }
+      }
+    });
   }
 
 
